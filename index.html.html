@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mediterranèe - Pizzeria dal 1994</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-green: #0b2417;
+            --accent-gold: #d4af37;
+            --light-green: #1b5e3c;
+            --text-white: #ffffff;
+            --soft-white: #f4f4f4;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--primary-green);
+            color: var(--text-white);
+            line-height: 1.6;
+            scroll-behavior: smooth;
+        }
+
+        /* Header */
+        header {
+            background-color: rgba(11, 36, 23, 0.98);
+            padding: 20px;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid var(--accent-gold);
+        }
+
+        header h1 {
+            font-family: 'Playfair Display', serif;
+            color: var(--accent-gold);
+            margin: 0;
+            font-size: 2.2rem;
+            letter-spacing: 2px;
+        }
+
+        nav { margin-top: 15px; }
+
+        nav a {
+            color: var(--soft-white);
+            margin: 0 15px;
+            text-decoration: none;
+            font-weight: 400;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            transition: 0.3s;
+        }
+
+        nav a:hover { color: var(--accent-gold); }
+
+        /* Hero */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)),
+                        url("https://images.unsplash.com/photo-1601924582975-4aa1c58c45a9?auto=format&fit=crop&q=80") center/cover;
+            height: 45vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
+        }
+
+        .hero h2 {
+            font-family: 'Playfair Display', serif;
+            color: var(--accent-gold);
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+        }
+
+        /* Banner Avvisi */
+        .alert-banner {
+            background-color: var(--accent-gold);
+            color: #000;
+            padding: 15px;
+            text-align: center;
+            font-weight: 700;
+            font-size: 1rem;
+            text-transform: uppercase;
+        }
+
+        /* Sezioni Generali */
+        section {
+            padding: 60px 20px;
+            max-width: 1100px;
+            margin: auto;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            color: var(--accent-gold);
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 40px;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 50px;
+            height: 2px;
+            background: var(--accent-gold);
+            margin: 10px auto;
+        }
+
+        /* Menù Accordion */
+        .accordion details {
+            background-color: var(--light-green);
+            margin-bottom: 15px;
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid rgba(212, 175, 55, 0.1);
+        }
+
+        .accordion summary {
+            padding: 18px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--accent-gold);
+            list-style: none;
+            outline: none;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 15px;
+            padding: 20px;
+            background: rgba(0,0,0,0.1);
+        }
+
+        .menu-item {
+            background-color: rgba(255,255,255,0.03);
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 2px solid var(--accent-gold);
+        }
+
+        .menu-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+        }
+
+        .menu-item h3 { margin: 0; font-size: 1rem; color: var(--accent-gold); }
+        .price { font-weight: 600; font-size: 0.95rem; }
+        .description { font-size: 0.8rem; color: #ccc; margin-top: 5px; }
+
+        /* Contatti & Mappa */
+        .contact-box { text-align: center; }
+        .contact-link {
+            display: inline-block;
+            color: var(--soft-white);
+            text-decoration: none;
+            margin: 10px 15px;
+            font-weight: 600;
+        }
+
+        footer {
+            background-color: #05120b;
+            text-align: center;
+            padding: 30px;
+            font-size: 0.8rem;
+            border-top: 1px solid rgba(212,175,55,0.2);
+        }
+
+        @media (max-width: 600px) {
+            .hero h2 { font-size: 1.8rem; }
+            .menu-grid { grid-template-columns: 1fr; }
+        }
+   /* 🍕 Pizza Rain Elegante */
+.pizza-rain {
+    position: fixed;
+    top: -40px;
+    font-size: 18px;
+    opacity: 0.6;
+    animation: elegantFall linear forwards;
+    z-index: 9999;
+    pointer-events: none;
+    filter: blur(0.3px);
+}
+
+@keyframes elegantFall {
+    0% {
+        transform: translateY(0) rotate(0deg);
+    }
+    100% {
+        transform: translateY(110vh) rotate(180deg);
+        opacity: 0.4;
+    }
+}
+/* 📸 Galleria Menu */
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.gallery-item {
+    overflow: hidden;
+    border-radius: 12px;
+    border: 1px solid rgba(212, 175, 55, 0.2);
+    background-color: rgba(255,255,255,0.03);
+    transition: transform 0.3s ease;
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s ease, opacity 0.5s ease;
+}
+
+.gallery-item:hover img {
+    transform: scale(1.08);
+    opacity: 0.9;
+}
+
+.map-container {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%;
+    height: 0;
+}
+
+.map-container iframe {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    border: 0;
+}
+ </style>
+</head>
+<body>
+<script>
+function createElegantPizza() {
+    const pizza = document.createElement("div");
+    pizza.classList.add("pizza-rain");
+    pizza.innerHTML = "🍕";
+
+    pizza.style.left = Math.random() * window.innerWidth + "px";
+    pizza.style.animationDuration = (Math.random() * 4 + 6) + "s";
+    pizza.style.fontSize = (Math.random() * 10 + 16) + "px";
+
+    document.body.appendChild(pizza);
+
+    setTimeout(() => {
+        pizza.remove();
+    }, 10000);
+}
+
+setInterval(createElegantPizza, 2000);
+</script>
+
+<header>
+    <h1>Mediterranèe</h1>
+    <nav>
+        <a href="#contatti">Contatti</a>
+        <a href="#chi-siamo">La Storia</a>
+        <a href="#menu">Menù</a>
+	<a href="#galleria">Galleria Menù</a>
+        <a href="#mappa">Dove ci troviamo</a>
+    </nav>
+</header>
+
+<div class="hero">
+    <h2>Tradizione dal 1994</h2>
+    <p>Qualità • Passione • Gusto Autentico</p>
+</div>
+
+<div class="alert-banner">
+   <b>SIAMO FELICI DI ANNUNCIARE LA RIAPERTURA IL     !<b>
+<br> ORARI FISSI: 18:30 – 23:30 | GIORNI: VEN • SAB • DOM
+</div>
+
+<section id="contatti">
+    <h2 class="section-title">Contatti</h2>
+    <div class="contact-box">
+        <p>Siamo a tua disposizione per prenotazioni tavoli e asporto:<br>
+Contattateci via:</p>
+        <a href="tel:+393286833721" class="contact-link"><u>📞 Telefono: 328 6833721</u></a><br>
+        <a href="https://wa.me/393286833721" class="contact-link"><u>💬 WhatsApp</u></a>
+         </div>
+</section>
+
+<section id="chi-siamo">
+    <h2 class="section-title">La Nostra Storia</h2>
+    <p style="text-align: center; max-width: 800px; margin: auto;">
+     Mediterranèe è una pizzeria che dal 1994 porta avanti una storia fatta di passione, dedizione e tradizione. Fin dal primo giorno l’attività è gestita dallo stesso proprietario nonché -il pizzaiolo- custode di una ricetta e di un modo di fare la pizza rimasti immutati nel tempo.Prevalentemente a gestione familiare.
+<br>
+<br>
+La continuità nella gestione e l’esperienza maturata in oltre trent’anni di attività  garantiscono un prodotto sempre fedele alle origini: un impasto preparato con cura artigianale, ingredienti selezionati e una filosofia che privilegia la qualità rispetto alla quantità.
+<br>
+<br>
+Mediterranèe non è solo una pizzeria, ma un punto di riferimento per chi cerca sapori autentici e un ambiente familiare, dove l’accoglienza è parte integrante dell’esperienza. Dal 1994 ad oggi, ogni pizza racconta la stessa storia di allora: quella di un mestiere portato avanti con amore e coerenza.
+    </p>
+</section>
+
+<section id="menu">
+    <h2 class="section-title">Il Nostro Menù</h2>
+    
+    <div class="accordion">
+        <details open>
+            <summary>🍕 Le Nostre Specialità</summary>
+            <div class="menu-grid">
+                <div class="menu-item"><div class="menu-header"><h3>Mediterranèe</h3><span class="price">€ 8,50</span></div><p class="description">Pomodoro, frutti di mare, aglio, olio, origano</p></div>
+                <div class="menu-item"><div class="menu-header"><h3>Salsiccia e Friarielli</h3><span class="price">€ 8,00</span></div><p class="description">Bianca o rossa con fior di latte e friarielli</p></div>
+                <div class="menu-item"><div class="menu-header"><h3>Crudo, Rucola e Grana</h3><span class="price">€ 8,00</span></div><p class="description">Fior di latte, rucola, prosciutto crudo, grana</p></div>
+		<div class="menu-item"><div class="menu-header"><h3>Bianca Mediterranea</h3><span class="price">€ 8,00</span></div><p class="description">Fior di latte,zucchine,prosc.Cotto,pomodorini, Grana Padano, bufala</p></div>
+		 <div class="menu-item"><div class="menu-header"><h3>Calabrese</h3><span class="price">€ 8,00</span></div><p class="description">Salame, funghi, olive, capperi, pomodoro, fior di latte</p></div>
+                <div class="menu-item"><div class="menu-header"><h3>Salmone</h3><span class="price">€ 8,50</span></div><p class="description">Fior di latte, salmone affumicato</p></div>
+                <div class="menu-item"><div class="menu-header"><h3>'Nduja</h3><span class="price">€ 7,00</span></div><p class="description">Pomodoro, fior di latte, 'nduja, olio, origano</p></div>
+                <div class="menu-item"><div class="menu-header"><h3>Margherita Bufala</h3><span class="price">€ 7,00</span></div><p class="description">Pomodoro, mozzarella di bufala, olio, origano</p></div>
+                 <div class="menu-item"><div class="menu-header"><h3>Speck</h3><span class="price">€ 8,00</span></div><p class="description">Pomodoro, fior di latte, speck</p></div>
+                <div class="menu-item"><div class="menu-header"><h3>Quattro Formaggi</h3><span class="price">€ 8,00</span></div><p class="description">Gorgonzola, grana padano, maasdammer, fior di latte</p></div>
+		<div class="menu-item"><div class="menu-header"><h3>Porcini</h3><span class="price">€ 8,00</span></div><p class="description">Pomodoro, fior di latte, porcini</p></div>
+		<div class="menu-item"><div class="menu-header"><h3>Parmigiana</h3><span class="price">€ 8,00</span></div><p class="description">Pomodoro, melanzane, grana padano</p></div>
+		<div class="menu-item"><div class="menu-header"><h3>Gorgonzola</h3><span class="price">€ 7,00</span></div><p class="description">Pomodoro,fior di latte,gorgonzola</p></div>
+		<div class="menu-item"><div class="menu-header"><h3>Asparagi</h3><span class="price">€ 7,00</span></div><p class="description">Pomodoro,Fior di latte, asparagi</p></div>
+		<div class="menu-item"><div class="menu-header"><h3>Radicchio</h3><span class="price">€ 7,00</span></div><p class="description">Pomodoro,fior di latte, radicchio</p></div>
+		  <div class="menu-item"><div class="menu-header"><h3>Verdure</h3><span class="price">€ 8,00</span></div><p class="description">Melanzane, peperoni, zucchine</p></div>
+		
+            </div>
+        </details>
+
+        <details>
+            <summary>🍅 Le  altre Pizze</summary>
+            <div class="menu-grid">
+                <div class="menu-item"><div class="menu-header"><h3>Margherita</h3><span class="price">€ 6,00</span></div><p class="description">Pomodoro, fior di latte, olio, origano</p></div>
+		<div class="menu-item"><div class="menu-header"><h3>Marinara</h3><span class="price">€ 5,00</span></div><p class="description">Pomodoro, aglio, olio, origano</p></div>
+                <div class="menu-item"><div class="menu-header"><h3>Napoletana</h3><span class="price">€ 7,00</span></div><p class="description">Pomodoro, fior di latte, acciughe, olio, origano</p></div>
+                <div class="menu-item"><div class="menu-header"><h3>Romana</h3><span class="price">€ 7,00</span></div><p class="description">Pomodoro, fior di latte, acciughe, capperi</p></div>
+                <div class="menu-item"><div class="menu-header"><h3>Pugliese</h3><span class="price">€ 7,00</span></div><p class="description">Pomodoro, fior di latte, cipolla, olio, origano</p></div>
+                <div class="menu-item"><div class="menu-header"><h3>Prosciutto Cotto</h3><span class="price">€ 7,00</span></div><p class="description">Pomodoro, fior di latte, prosciutto cotto</p></div>
+		 <div class="menu-item"><div class="menu-header"><h3>Quattro Stagioni</h3><span class="price">€ 8,00</span></div><p class="description">Prosciutto, funghi, olive, carciofi</p></div>
+                <div class="menu-item"><div class="menu-header"><h3>Capricciosa</h3><span class="price">€ 8,00</span></div><p class="description">Prosciutto, funghi, carciofi</p></div>
+                <div class="menu-item"><div class="menu-header"><h3>Bianca</h3><span class="price">€ 4,00</span></div><p class="description">Olio, origano o rosmarino</p></div>
+                <div class="menu-item"><div class="menu-header"><h3>Prosciutto e Funghi</h3><span class="price">€ 8,00</span></div><p class="description">Pomodoro, fior di latte, cotto, funghi</p></div>
+               	  <div class="menu-item"><div class="menu-header"><h3>Prosciutto Crudo</h3><span class="price">€ 8,00</span></div><p class="description">Pomodoro,fior di latte, prosc.Crudo</p></div>
+		  <div class="menu-item"><div class="menu-header"><h3>Champignon freschi</h3><span class="price">€ 7,00</span></div><p class="description">Pomodoro, fior di latte, champignon freschi</p></div>
+                <div class="menu-item"><div class="menu-header"><h3>Tonno</h3><span class="price">€ 7,50</span></div><p class="description">Pomodoro, fior di latte, tonno</p></div>
+                  <div class="menu-item"><div class="menu-header"><h3>Salame</h3><span class="price">€ 7,00</span></div><p class="description">Pomodoro, fior di latte, salame</p></div>
+		  <div class="menu-item"><div class="menu-header"><h3>Peperoni</h3><span class="price">€ 6,50</span></div><p class="description">Pomodoro, fior di latte,peperoni</p></div>
+		  <div class="menu-item"><div class="menu-header"><h3>Wurstel</h3><span class="price">€ 7,00</span></div><p class="description">Pomodoro, fior di latte,wurstel</p></div>
+		  <div class="menu-item"><div class="menu-header"><h3>Mais</h3><span class="price">€ 7,00</span></div><p class="description">Pomodoro,fior di latte,mais</p></div>
+		  <div class="menu-item"><div class="menu-header"><h3>Viennese</h3><span class="price">€ 8,00</span></div><p class="description">Pomodoro, fior di latte,prosc.Cotto, wurstel</p></div>
+		
+                <div class="menu-item"><div class="menu-header"><h3>Spinaci</h3><span class="price">€ 7,00</span></div><p class="description">Fior di latte, spinaci, olio, origano</p></div>
+                <div class="menu-item"><div class="menu-header"><h3>Melanzane</h3><span class="price">€ 7,00</span></div><p class="description">Pomodoro, fior di latte, melanzane</p></div>
+                <div class="menu-item"><div class="menu-header"><h3>Carciofi</h3><span class="price">€ 7,00</span></div><p class="description">Pomodoro, fior di latte, carciofi</p></div>
+            </div>
+        </details>
+
+        <details>
+            <summary>🥖 Filoncini</summary>
+            <div class="menu-grid">
+                <div class="menu-item"><div class="menu-header"><h3>Speck e Funghi</h3><span class="price">€ 7,00</span></div><p class="description">Fior di latte, speck, funghi</p></div>
+                <div class="menu-item"><div class="menu-header"><h3>Al Crudo</h3><span class="price">€ 7,00</span></div><p class="description">Fior di latte, prosciutto crudo</p></div>
+                <div class="menu-item"><div class="menu-header"><h3>Al Tonno</h3><span class="price">€ 7,00</span></div><p class="description">Fior di latte, tonno, salsa casa</p></div>
+                <div class="menu-item"><div class="menu-header"><h3>Quattro Formaggi</h3><span class="price">€ 7,00</span></div><p class="description">Fior di latte, grana, gorgonzola, maasdammer</p></div>
+	<div class="menu-item"><div class="menu-header"><h3>Salame e cipolla</h3><span class="price">€ 7,00</span></div><p class="description">Fior di latte,salame, cipolla</p></div>
+	<div class="menu-item"><div class="menu-header"><h3>Spinaci e Formaggi</h3><span class="price">€ 7,00</span></div><p class="description">Fior di latte,spinaci,massdammer</p></div>
+		<div class="menu-item"><div class="menu-header"><h3>Rucola e prosciutto</h3><span class="price">€ 7,00</span></div><p class="description">Fior di latte,massdammer, rucola, prosc.Cotto</p></div>
+		<div class="menu-item"><div class="menu-header"><h3>Pomodori secchi e acciughe</h3><span class="price">€ 7,00</span></div><p class="description">Fior di latte,pomodori secchi, acciughe</p></div>
+		<div class="menu-item"><div class="menu-header"><h3>Funghi porcini</h3><span class="price">€ 7,00</span></div><p class="description">Fior di latte,porcini</p></div>
+		<div class="menu-item"><div class="menu-header"><h3>Salmone</h3><span class="price">€ 7,00</span></div><p class="description">Fior di latte,salmone affumicato</p></div>
+		<div class="menu-item"><div class="menu-header"><h3>Prosciutto e Salame</h3><span class="price">€ 7,00</span></div><p class="description">Fior di latte, prosc.Cotto, salame</p></div>
+            </div>
+        </details>
+
+        <details>
+            <summary>🥟 Calzoni</summary>
+            <div class="menu-grid">
+                <div class="menu-item"><div class="menu-header"><h3>Fantasia</h3><span class="price">€ 8,50</span></div><p class="description">Cotto, funghi, salame, carciofi, melanzane</p></div>
+                <div class="menu-item"><div class="menu-header"><h3>Classico</h3><span class="price">€ 8,00</span></div><p class="description">Pomodoro, fior di latte, prosciutto cotto, funghi</p></div>
+            </div>
+        </details>
+	
+        <details>
+  <summary>🍟 Rosticceria 🧆</summary>
+  <div class="menu-grid">
+
+    <div class="menu-item">
+      <div class="menu-header">
+        <h3>Patatine Fritte</h3>
+        <span class="price">€ 3,50</span>
+      </div>
+    </div>
+
+    <div class="menu-item">
+      <div class="menu-header">
+        <h3>Patatine (Porzione abbondante)</h3>
+        <span class="price">€4,50</span>
+      </div>
+    </div>
+
+    <div class="menu-item">
+      <div class="menu-header">
+        <h3>Jalapeño</h3>
+        <span class="price">€ 4,00</span>
+      </div>
+    </div>
+
+    <div class="menu-item">
+      <div class="menu-header">
+        <h3>Bruschetta</h3>
+        <span class="price">€ 2,00</span>
+      </div>
+    </div>
+
+    <div class="menu-item">
+      <div class="menu-header">
+        <h3>Crocchette di patate</h3>
+        <span class="price">€ 4,00</span>
+      </div>
+    </div>
+
+    <div class="menu-item">
+      <div class="menu-header">
+        <h3>Chele di granchio</h3>
+        <span class="price">€ 3,50</span>
+      </div>
+    </div>
+
+    <div class="menu-item">
+      <div class="menu-header">
+        <h3>Insalata verde</h3>
+        <span class="price">€ 3,50</span>
+      </div>
+    </div>
+
+    <div class="menu-item">
+      <div class="menu-header">
+        <h3>Insalata mista</h3>
+        <span class="price">€ 4,50</span>
+      </div>
+    </div>
+
+    <div class="menu-item">
+      <div class="menu-header">
+        <h3>Triangoli di speck e patate</h3>
+        <span class="price">€ 4,00</span>
+      </div>
+    </div>
+
+    <div class="menu-item">
+      <div class="menu-header">
+        <h3>Polpette di melanzane</h3>
+        <span class="price">€ 4,00</span>
+      </div>
+    </div>
+
+    <div class="menu-item">
+      <div class="menu-header">
+        <h3>Antipasto alla calabrese</h3>
+        <span class="price">€ 8,00</span>
+      </div>
+    </div>
+
+    <div class="menu-item">
+      <div class="menu-header">
+        <h3>Nuggets pollo</h3>
+        <span class="price">€ 4,00</span>
+      </div>
+    </div>
+
+    <div class="menu-item">
+      <div class="menu-header">
+        <h3>Misto fritto</h3>
+        <span class="price">€ 5,00</span>
+      </div>
+    </div>
+
+    <div class="menu-item">
+      <div class="menu-header">
+        <h3>Mozzarelline</h3>
+        <span class="price">€ 3,50</span>
+      </div>
+    </div>
+
+    <div class="menu-item">
+      <div class="menu-header">
+        <h3>Anelli di cipolla</h3>
+        <span class="price">€ 4,00</span>
+      </div>
+    </div>
+
+  </div>
+</details>
+
+</section>
+<section id="galleria">
+    <h2 class="section-title">Galleria del Menù</h2>
+    
+    <div class="gallery-grid">
+
+        <div class="gallery-item">
+            <img src="immagini/image6.jpg" alt="Pizza Mediterranèe">
+        </div>
+
+        <div class="gallery-item">
+            <img src="immagini/image7.jpg" alt="Pizza Quattro Formaggi">
+        </div>
+
+        <div class="gallery-item">
+            <img src="immagini/image8.jpg" alt="Calzone Fantasia">
+        </div>
+
+	<div class="gallery-item">
+            <img src="immagini/image4.jpg" alt="Calzone Fantasia">
+        </div>
+
+
+	<div class="gallery-item">
+            <img src="immagini/image3.jpg" alt="Calzone Fantasia">
+        </div>
+
+	<div class="gallery-item">
+            <img src="immagini/image2.jpg" alt="Calzone Fantasia">
+        </div>
+	
+	<div class="gallery-item">
+            <img src="immagini/image1.jpg" alt="Calzone Fantasia">
+        </div>
+
+	<div class="gallery-item">
+            <img src="immagini/image0.jpg" alt="Calzone Fantasia">
+        </div>
+    </div>
+</section>
+
+<section id="mappa">
+    <h2 class="section-title">Dove ci troviamo</h2>
+    <div class="contact-box">
+        <p>
+📍 
+<a href="https://www.google.com/maps/search/?api=1&query=Via+Nazionale+Sant%27Andrea+Apostolo+dello+Ionio+CZ"
+   target="_blank"
+   style="color: var(--accent-gold); text-decoration: none;">
+   Via Nazionale, Sant'Andrea Apostolo dello Ionio (CZ)
+</a>
+</p>
+        <div class="map-container">
+            <div class="map-container">
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3117.092494767717!2d16.54942677431994!3d38.62375316280663!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x136ab2a411fa9b1f%3A0x734a012414f57dc6!2sPizzeria%20Mediterranee%20Sas!5e0!3m2!1sit!2sit!4v1772390617506!5m2!1sit!2sit";" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+       
+</div>
+        </div>
+    </div>
+</section>
+
+<footer>
+    © 2026 Mediterranèe Pizzeria – Sant'Andrea Apostolo dello Ionio
+</footer>
+
+</body>
+</html>
